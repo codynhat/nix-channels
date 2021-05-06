@@ -1,40 +1,17 @@
-{ lib
-, fetchFromGitHub
-, rustPlatform
-, cmake
-, llvmPackages
-, openssl
-, pkg-config
-, systemd
-}:
+{ stdenv, fetchzip, lib }:
 
-rustPlatform.buildRustPackage rec {
-  pname = "openethereum";
+stdenv.mkDerivation rec {
+  name = "openethereum";
   version = "3.2.5";
-
-  src = fetchFromGitHub {
-    owner = "openethereum";
-    repo = "openethereum";
-    rev = "v${version}";
-    sha256 = "08dkcrga1x18csh6pw6f54x5xwijppyjhg46cf4p452xc1l3a6ir";
+  src = fetchzip {
+    url = "https://github.com/openethereum/openethereum/releases/download/v${version}/openethereum-macos-v${version}.zip";
+    sha256 = "0l6kmm2d80h32c03sbbl5rvgr0w1piq4452cibq1pyx44vvp3hpx";
+    stripRoot = false;
   };
 
-  cargoSha256 = "1xliragihwjfc5qmfm0ng519bw8a28m1w1yqcl9mpk8zywiybaah";
-
-  LIBCLANG_PATH = "${llvmPackages.libclang}/lib";
-  nativeBuildInputs = [
-    cmake
-    llvmPackages.clang
-    llvmPackages.libclang
-    pkg-config
-  ];
-
-  buildInputs = [ openssl ];
-
-  cargoBuildFlags = [ "--features final" ];
-
-  # test result: FAILED. 88 passed; 13 failed; 0 ignored; 0 measured; 0 filtered out
-  doCheck = false;
+  installPhase = ''
+    install -m755 -D openethereum $out/bin/openethereum
+  '';
 
   meta = with lib; {
     description = "Fast, light, robust Ethereum implementation";
