@@ -1,17 +1,17 @@
-{ stdenv, fetchFromGitHub, lib, pkgs }:
+{ stdenv, fetchFromGitHub, lib, pkgs, buildGoModule }:
 
 stdenv.mkDerivation rec {
   name = "heimdall";
   version = "0.2.1";
   rev = "v${version}-mainnet";
 
-  buildInputs = with pkgs; [ go_1_15 ];
+  buildInputs = with pkgs; [ go ];
 
   src = fetchFromGitHub {
     owner = "maticnetwork";
     repo = "heimdall";
     inherit rev;
-    sha256 = "0d2vhb49sqi51rz3j2vzxmpyfkhdls8yvmnf8shz1067945cspsw";
+    sha256 = "1a8ia9s4jyamz6ka6dyvyy2cnfqhad4a10lwvw10dghwd7dpyyqx";
   };
 
   meta = with lib; {
