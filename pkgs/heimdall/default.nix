@@ -1,11 +1,11 @@
 { stdenv, fetchFromGitHub, lib, pkgs, buildGoModule }:
 
-stdenv.mkDerivation rec {
+buildGoModule rec {
   name = "heimdall";
   version = "0.2.1";
   rev = "v${version}-mainnet";
-
-  buildInputs = with pkgs; [ go ];
+  
+  vendorSha256 = "1pqbalkb5a46vhwfcfv50bkfbxn5m4606gg67xzqj1s1wpqf74p2";
 
   src = fetchFromGitHub {
     owner = "maticnetwork";
