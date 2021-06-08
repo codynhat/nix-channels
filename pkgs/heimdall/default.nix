@@ -1,11 +1,23 @@
-{ stdenv, fetchFromGitHub, lib, pkgs, buildGoModule }:
+{ stdenv, fetchFromGitHub, lib, pkgs, buildGoPackage }:
 
-buildGoModule rec {
+buildGoPackage rec {
   name = "heimdall";
   version = "0.2.1";
   rev = "v${version}-mainnet";
+
+  goPackagePath = "github.com/maticnetwork/heimdall";
+  buildInputs = with pkgs; [ go ];
+  goDeps = ./deps.nix;
   
-  vendorSha256 = "1pqbalkb5a46vhwfcfv50bkfbxn5m4606gg67xzqj1s1wpqf74p2";
+  buildFlagsArray = ''
+    -ldflags=
+    -X github.com/cosmos/cosmos-sdk/version.Name=heimdall 
+    -X github.com/cosmos/cosmos-sdk/version.AppName=heimdall 
+    -X github.com/cosmos/cosmos-sdk/version.Version=0.3.0-370-g0f060e0e 
+    -X github.com/cosmos/cosmos-sdk/version.Commit=0f060e0ea00e10b7ddee486bf514d71f6a54d9fa 
+    -s 
+    -w
+  '';
 
   src = fetchFromGitHub {
     owner = "maticnetwork";
