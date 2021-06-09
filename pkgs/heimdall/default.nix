@@ -1,22 +1,19 @@
 { stdenv, fetchFromGitHub, lib, pkgs, buildGoPackage }:
 
-buildGoPackage rec {
+stdenv.mkDerivation rec {
   name = "heimdall";
   version = "0.2.1";
   rev = "v${version}-mainnet";
 
-  goPackagePath = "github.com/maticnetwork/heimdall";
   buildInputs = with pkgs; [ go ];
-  goDeps = ./deps.nix;
   
-  buildFlagsArray = ''
-    -ldflags=
-    -X github.com/cosmos/cosmos-sdk/version.Name=heimdall 
-    -X github.com/cosmos/cosmos-sdk/version.AppName=heimdall 
-    -X github.com/cosmos/cosmos-sdk/version.Version=0.3.0-370-g0f060e0e 
-    -X github.com/cosmos/cosmos-sdk/version.Commit=0f060e0ea00e10b7ddee486bf514d71f6a54d9fa 
-    -s 
-    -w
+  preBuild = ''
+    export HOME="$(pwd)/.home"
+  '';
+
+  postInstall = ''
+    pwd
+    ls -la .home/
   '';
 
   src = fetchFromGitHub {
