@@ -12,8 +12,7 @@ stdenv.mkDerivation rec {
   '';
 
   postInstall = ''
-    pwd
-    ls -la .home/
+    cp -rv .home/go/* $out
   '';
 
   src = fetchFromGitHub {
