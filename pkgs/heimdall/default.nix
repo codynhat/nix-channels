@@ -1,19 +1,11 @@
-{ stdenv, fetchFromGitHub, lib, pkgs, buildGoPackage }:
+{ stdenv, fetchFromGitHub, lib, pkgs }:
 
-stdenv.mkDerivation rec {
-  name = "heimdall";
+pkgs.buildGoApplication rec {
+  pname = "heimdall";
   version = "0.2.1";
   rev = "v${version}-mainnet";
 
-  buildInputs = with pkgs; [ go ];
-  
-  preBuild = ''
-    export HOME="$(pwd)/.home"
-  '';
-
-  postInstall = ''
-    cp -rv .home/go/* $out
-  '';
+  modules = ./gomod2nix.toml;
 
   src = fetchFromGitHub {
     owner = "maticnetwork";
