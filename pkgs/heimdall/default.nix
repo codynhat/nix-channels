@@ -1,25 +1,22 @@
-{ stdenv, fetchFromGitHub, lib, pkgs, buildGoPackage }:
+{ stdenv, fetchFromGitHub, lib, pkgs, buildGoModule }:
 
-stdenv.mkDerivation rec {
+buildGoModule rec {
   name = "heimdall";
   version = "0.2.1";
-  rev = "v${version}-mainnet";
+  rev = "codynhat";
 
-  buildInputs = with pkgs; [ go ];
-  
-  preBuild = ''
-    export HOME="$(pwd)/.home"
-  '';
+  vendorSha256 = null;
 
-  postInstall = ''
-    cp -rv .home/go/* $out
-  '';
+  subPackages = [
+    "cmd/heimdallcli"
+    "cmd/heimdalld"
+  ];
 
   src = fetchFromGitHub {
-    owner = "maticnetwork";
+    owner = "codynhat";
     repo = "heimdall";
     inherit rev;
-    sha256 = "1a8ia9s4jyamz6ka6dyvyy2cnfqhad4a10lwvw10dghwd7dpyyqx";
+    sha256 = "1sv37m4jqwbwl9lsrz5dx9hz5lk6vfx72573clc8g49gp0irhwn5";
   };
 
   meta = with lib; {
