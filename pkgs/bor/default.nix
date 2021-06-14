@@ -26,6 +26,10 @@ buildGoModule rec {
     "cmd/utils"
   ];
 
+  postInstall = ''
+    mv -v $out/bin/geth $out/bin/bor
+  '';
+
   src = fetchFromGitHub {
     owner = "codynhat";
     repo = "bor";
