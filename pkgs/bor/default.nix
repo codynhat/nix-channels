@@ -1,22 +1,37 @@
-{ stdenv, fetchFromGitHub, lib, pkgs }:
+{ stdenv, fetchFromGitHub, lib, pkgs, buildGoModule }:
 
-stdenv.mkDerivation rec {
+buildGoModule rec {
   name = "bor";
   version = "0.2.6";
-  rev = "v${version}";
+  rev = "codynhat";
 
-  buildInputs = with pkgs; [ go_1_15 ];
+  vendorSha256 = null;
+
+  doCheck = false;
+
+  subPackages = [
+    "cmd/abidump"
+    "cmd/abigen"
+    "cmd/bootnode"
+    "cmd/checkpoint-admin"
+    "cmd/clef"
+    "cmd/devp2p"
+    "cmd/ethkey"
+    "cmd/evm"
+    "cmd/faucet"
+    "cmd/geth"
+    "cmd/p2psim"
+    "cmd/puppeth"
+    "cmd/rlpdump"
+    "cmd/utils"
+  ];
 
   src = fetchFromGitHub {
-    owner = "maticnetwork";
+    owner = "codynhat";
     repo = "bor";
     inherit rev;
-    sha256 = "1a8ia9s4jyamz6ka6dyvyy2cnfqhad4a10lwvw10dghwd7dpyyqx";
+    sha256 = "0inp5jbcdyygqjgkkb7xn8fm8hcdzvx6413fcqw9jmhqkz06qkai";
   };
-
-  buildPhase = ''
-    make bor-all
-  '';
 
   meta = with lib; {
     description = "Official Golang implementation of the Matic protocol";
