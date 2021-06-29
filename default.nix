@@ -1,4 +1,4 @@
-{ pkgs ? import <staging> {} }:
+{ pkgs ? import <nixpkgs> {} }:
 
 let
 in {
