@@ -5,7 +5,9 @@ rustPlatform.buildRustPackage rec {
   version = "0.23.1";
   rev = "v${version}";
 
-  buildInputs = [ pkgs.libiconv pkgs.postgresql_11 ];
+  nativeBuildInputs = [ pkgs.libiconv pkgs.postgresql_11 pkgs.pkg-config ]; 
+  buildInputs = [ pkgs.openssl ];
+  doCheck = false;
 
   src = fetchFromGitHub {
     owner = "graphprotocol";
