@@ -2,7 +2,7 @@
 
 buildGoModule rec {
   name = "bor";
-  version = "0.2.6";
+  version = "0.2.8";
   rev = "codynhat";
 
   vendorSha256 = null;
@@ -34,7 +34,7 @@ buildGoModule rec {
     owner = "codynhat";
     repo = "bor";
     inherit rev;
-    sha256 = "0inp5jbcdyygqjgkkb7xn8fm8hcdzvx6413fcqw9jmhqkz06qkai";
+    sha256 = "13p91di9f6k5mhfb43jwrl9v7yvyx9d2pnyps1k5wnf22y469srv";
   };
 
   meta = with lib; {
