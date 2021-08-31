@@ -34,7 +34,7 @@ buildGoModule rec {
     owner = "codynhat";
     repo = "bor";
     inherit rev;
-    sha256 = "13p91di9f6k5mhfb43jwrl9v7yvyx9d2pnyps1k5wnf22y469srv";
+    sha256 = "17b14mmnizailkla6xxcm95a8x3w04likp1mrpi6zqg6bqhnfxyz";
   };
 
   meta = with lib; {
