@@ -1,13 +1,7 @@
 { lib
-, mkDerivation
+, stdenv
 , fetchurl
-, autoPatchelfHook
-, pkg-config
-, curl
-, ffmpeg
-, openssl
-, qtbase
-, zlib
+, pkgs
 
 , withJava ? true
 , jre_headless
@@ -31,7 +25,7 @@ let
     sha256 = "sha256-TL0PRP/pDg16qsbYi9RYyD0egNDaxuApmR86hiR/Rq8=";
   };
 
-in mkDerivation {
+in stdenv.mkDerivation {
   pname = "makemkv";
   inherit version;
 
@@ -39,11 +33,11 @@ in mkDerivation {
 
   sourceRoot = "makemkv-oss-${version}";
 
-  nativeBuildInputs = [ autoPatchelfHook pkg-config ];
+  nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.pkg-config ];
 
-  buildInputs = [ ffmpeg openssl qtbase zlib ];
+  buildInputs = [ pkgs.ffmpeg pkgs.openssl pkgs.qtbase pkgs.zlib ];
 
-  runtimeDependencies = [ (lib.getLib curl) ];
+  runtimeDependencies = [ (lib.getLib pkgs.curl) ];
 
   qtWrapperArgs =
     let
