@@ -7,5 +7,6 @@ in {
     openethereum = pkgs.callPackage ./pkgs/openethereum/default.nix { };
     graph-node = pkgs.callPackage ./pkgs/graph-node/default.nix { };
     friidump = pkgs.callPackage ./pkgs/friidump/default.nix { };
+    makemkv = pkgs.callPackage ./pkgs/makemkv/default.nix { };
 }
 
