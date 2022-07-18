@@ -8,5 +8,6 @@ in {
     graph-node = pkgs.callPackage ./pkgs/graph-node/default.nix { };
     friidump = pkgs.callPackage ./pkgs/friidump/default.nix { };
     makemkv = pkgs.libsForQt5.callPackage ./pkgs/makemkv/default.nix { };
+    estuary = pkgs.callPackage ./pkgs/estuary/default.nix { };
 }
 
