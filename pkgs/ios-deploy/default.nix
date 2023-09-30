@@ -11,7 +11,7 @@ in stdenvNoCC.mkDerivation {
     owner = "ios-control";
     repo = "ios-deploy";
     rev = version;
-    sha256 = "0hqwikdrcnslx4kkw9b0n7n443gzn2gbrw15pp2fnkcw5s0698sc";
+    sha256 = "sha256-TVGC+f+1ow3b93CK3PhIL70le5SZxxb2ug5OkIg8XCA=";
   };
   nativeBuildInputs = [ rsync ];
   buildPhase = ''
