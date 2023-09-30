@@ -10,5 +10,6 @@ in {
     makemkv = pkgs.libsForQt5.callPackage ./pkgs/makemkv/default.nix { };
     estuary = pkgs.callPackage ./pkgs/estuary/default.nix { };
     livepeer = pkgs.callPackage ./pkgs/livepeer/default.nix { };
+    ios-deploy = pkgs.callPackage ./pkgs/ios-deploy/default.nix { };
 }
 
